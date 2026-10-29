@@ -1,0 +1,42 @@
+# 开发用的任务。Rust 工具链用 rustup 管理（见 Cargo.toml 的 rust-version）。
+
+[tasks.test]
+description = "全部测试"
+run = "cargo test --workspace --all-features"
+
+[tasks.lint]
+description = "格式和 clippy"
+run = ["cargo fmt --all -- --check", "cargo clippy --workspace --all-targets --all-features -- -D warnings"]
+
+[tasks.msrv]
+description = "用 Cargo.toml 的 rust-version（1.85）编译库和测试"
+run = "cargo +1.85.0 check -p nerdsynth --all-targets --features testkit"
+
+[tasks.check]
+description = "提交前的全部检查"
+depends = ["test", "lint"]
+
+[tasks.adversarial]
+description = "对抗探针（计时的 ignore 测试，release 下跑）"
+run = "cargo test --release -p nerdsynth --features testkit --test adversarial -- --ignored --nocapture --test-threads 1"
+
+[tasks.fx-metrics]
+description = "混响、合唱的客观指标：NerdSynth 对 FluidSynth（报告写到 tools/fxmetrics/out/report.md；见 tools/fxmetrics/README.md）"
+run = "cargo run --release -p nerdsynth-fxmetrics --"
+
+[tasks."diff:setup"]
+description = "差分测试台：安装 SpessaSynth（FluidSynth 另装：brew install fluid-synth）"
+dir = "tools/diff/spessa"
+run = "pnpm install --frozen-lockfile"
+
+[tasks."diff:refs"]
+description = "差分测试台：用 FluidSynth 和 SpessaSynth 渲染全部用例（已渲染的跳过）"
+run = "cargo run --release -p nerdsynth-diff -- refs"
+
+[tasks."diff:calibrate"]
+description = "差分测试台：SpessaSynth 对 FluidSynth，重定阈值（thresholds.json）并写校准报告"
+run = "cargo run --release -p nerdsynth-diff -- calibrate"
+
+[tasks.diff]
+description = "差分测试台：NerdSynth 对 FluidSynth（引擎就绪前用不了）"
+run = "cargo run --release -p nerdsynth-diff --features nerdsynth -- run --synth nerdsynth,fluidsynth"

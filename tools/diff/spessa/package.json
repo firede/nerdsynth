@@ -1,0 +1,9 @@
+{
+  "name": "nerdsynth-diff-spessa",
+  "private": true,
+  "description": "SpessaSynth reference renderer of the NerdSynth differential test bench",
+  "type": "module",
+  "dependencies": {
+    "spessasynth_core": "4.3.22"
+  }
+}

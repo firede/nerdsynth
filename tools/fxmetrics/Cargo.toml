@@ -1,0 +1,12 @@
+[package]
+name = "nerdsynth-fxmetrics"
+version = "0.0.0"
+description = "Objective quality metrics of the reverb and the chorus, NerdSynth against FluidSynth"
+publish = false
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+nerdsynth = { path = "../../nerdsynth", features = ["testkit"] }

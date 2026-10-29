@@ -1,0 +1,8 @@
+/target
+/tools/diff/out
+/tools/fxmetrics/out
+/fuzz/target
+/fuzz/corpus
+/fuzz/artifacts
+/tools/diff/spessa/node_modules
+/local

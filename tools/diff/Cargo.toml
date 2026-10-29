@@ -1,0 +1,18 @@
+[package]
+name = "nerdsynth-diff"
+version = "0.0.0"
+description = "Differential test bench: renders the same MIDI with FluidSynth, SpessaSynth and NerdSynth, and compares"
+publish = false
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+# Render with NerdSynth itself.
+nerdsynth = ["dep:nerdsynth"]
+
+[dependencies]
+nerdsynth = { path = "../../nerdsynth", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

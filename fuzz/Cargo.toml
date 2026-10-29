@@ -1,0 +1,37 @@
+[package]
+name = "nerdsynth-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+nerdsynth = { path = "../nerdsynth", features = ["testkit"] }
+
+# Not a member of the main workspace: cargo-fuzz needs nightly.
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "smf_read"
+path = "fuzz_targets/smf_read.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "soundfont_read"
+path = "fuzz_targets/soundfont_read.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "synth_play"
+path = "fuzz_targets/synth_play.rs"
+test = false
+doc = false
+bench = false

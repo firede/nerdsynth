@@ -1,0 +1,16 @@
+[package]
+name = "nerdsynth"
+version = "0.1.0"
+description = "A SoundFont 2 synthesizer: complete, sample-accurate and real-time safe"
+keywords = ["soundfont", "sf2", "midi", "synthesizer", "audio"]
+categories = ["multimedia::audio"]
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+# In-memory builders of SoundFonts and MIDI files, for tests and fuzzing.
+testkit = []
+
+[dependencies]
